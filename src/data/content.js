@@ -46,48 +46,66 @@ export const skills = {
 export const projects = [
   {
     id: 1,
-    title: "Quality Pulse - Construction QA System",
-    description: "Real-time construction quality assurance platform streamlining multi-site inspections. Reduced inspection delays by 30% and improved compliance accuracy through live metrics.",
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB"],
+    title: "Quality Pulse",
+    description: "Real-time construction quality assurance platform",
+    fullDescription: "Architected a real-time construction quality assurance platform to streamline multi-site inspections and improve compliance accuracy using the MERN stack. Delivered high-performance RESTful APIs and a React-based analytics dashboard with MongoDB integration ensuring 99.9% data reliability. Reduced inspection delays by 30%.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
     github: "https://github.com/Shraddhagupta37/Quality-Pulse-Construction-QA",
-    date: "Nov 2025 - Dec 2025",
-    mockups: ["/project1-1.png", "/project1-2.png", "/project1-3.png"], // Add your mockups later
-    features: [
-      "Real-time analytics dashboard",
-      "High-performance RESTful APIs",
-      "99.9% data reliability",
-      "Multi-site inspection tracking"
-    ]
+    date: "Dec 2025",
+    image: "../../public/project1.png",
+    featured: true
   },
   {
     id: 2,
-    title: "ToddleUp - Kids Learning Application",
-    description: "Offline-first desktop learning app for toddlers with rich visual and audio interactions. Features 6 learning modules with 100% offline reliability and sub-1 second load times.",
-    tech: ["Java", "Swing", "AWT", "OOP", "Graphics2D"],
+    title: "ToddleUp",
+    description: "Offline-first kids learning application",
+    fullDescription: "Crafted a fully offline, kid-friendly desktop learning app for toddlers with rich visual and audio interactions. Features 6 learning modules (alphabets, numbers, shapes, colours, drawing pad, quizzes) using Java Swing/AWT. Achieved 100% offline reliability and sub-1 second load times.",
+    tech: ["Java", "Swing", "AWT"],
     github: "https://github.com/Shraddhagupta37/ToddleUp-Kids-Learning-App",
-    date: "July 2025 - Aug 2025",
-    mockups: ["/project2-1.png", "/project2-2.png"],
-    features: [
-      "6 interactive learning modules",
-      "MVC-inspired architecture",
-      "Multimedia integration",
-      "Tested with 15+ users"
-    ]
+    date: "Aug 2025",
+    image: "../../public/project2.png",
+    featured: true
   },
   {
     id: 3,
-    title: "CodeLens - Proctor Exam Platform",
-    description: "Secure full-stack online proctoring platform for hackathons and recruitment exams. Features RBAC, automated evaluation, and comprehensive proctoring controls.",
-    tech: ["PHP", "MySQL", "TailwindCSS", "JavaScript", "HTML5"],
+    title: "CodeLens",
+    description: "Secure online proctoring platform",
+    fullDescription: "Engineered a secure full-stack online proctoring platform for hackathons and recruitment exams. Features RBAC authentication, automated MCQ and code evaluation, proctoring controls (tab-switch detection, fullscreen enforcement), and analytics dashboard.",
+    tech: ["PHP", "MySQL", "TailwindCSS", "JavaScript"],
     github: "https://github.com/Shraddhagupta37/CodeLens-Proctor-Exam-Platform",
-    date: "Feb 2025 - May 2025",
-    mockups: ["/project3-1.png", "/project3-2.png"],
+    date: "May 2025",
+    image: "../../public/project3.png",
+    featured: true
+  },
+  {
+    id: 4,
+    title: "MDM System",
+    description: "Mobile Device Management System",
+    fullDescription: "A full-stack Mobile Device Management (MDM) system that enables centralized management, monitoring, and updating of Android devices. Provides real-time visibility into device health, version distribution, and update execution through a modern, analytics-driven dashboard.",
+    tech: ["React", "Material UI", "Node.js", "Express", "MongoDB", "JWT"],
+    github: "https://github.com/Shraddhagupta37/MDM-System",
+    date: "Mar 2026",
+    image: "../../public/project4.png",
     features: [
-      "RBAC authentication",
-      "Automated MCQ & code evaluation",
-      "Tab-switch detection",
-      "Analytics dashboard"
+      "Secure authentication using JWT",
+      "Device enrollment and management",
+      "Software / firmware version tracking",
+      "Scheduled and phased update rollouts",
+      "Real-time update job monitoring",
+      "Detailed audit logging",
+      "Interactive analytics dashboard",
+      "Role-based access control"
     ]
+  },
+  {
+    id: 5,
+    title: "Portfolio 2026",
+    description: "Interactive developer portfolio",
+    fullDescription: "A modern, interactive portfolio website featuring fluid cursor effects, metallic gold/copper accents, terminal-style project displays, and smooth animations. Built with React, TailwindCSS, and Framer Motion.",
+    tech: ["React", "TailwindCSS", "Framer Motion", "JavaScript"],
+    github: "https://github.com/Shraddhagupta37/Shraddha-Portfolio",
+    date: "Mar 2026",
+    image: "../../public/project5.png"
   }
 ];
 

@@ -1,90 +1,259 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiExternalLink } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiExternalLink, FiArrowDown, FiCode } from 'react-icons/fi';
 import { personalInfo } from '../../data/content';
 
 const Hero = () => {
-  return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative"
-          >
-            <div className="w-56 h-56 md:w-64 md:h-64 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
-              <img
-                src="/profile.jpg"
-                alt={personalInfo.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div>
+  // Technical animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
 
-          {/* Text Content */}
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
+  const profileVariants = {
+    hidden: { opacity: 0, x: -50, rotate: -5 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      rotate: 0,
+      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 pt-16 overflow-hidden">
+      {/* Technical grid overlay */}
+      {/* <div className="absolute inset-0 -z-5 opacity-20 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(to right, #B8860B 1px, transparent 1px),
+            linear-gradient(to bottom, #B8860B 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }} />
+      </div> */}
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-7xl mx-auto"
+      >
+        <div className="flex flex-col-reverse md:flex-row items-center gap-16 md:gap-20">
+          
+          {/* Content - Left Side */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex-1 text-center md:text-left"
+            variants={containerVariants}
+            className="flex-1 text-center md:text-left order-2 md:order-1"
           >
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-3">
-              <span className="bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 bg-clip-text text-transparent">
-                {personalInfo.name}
+            {/* Code comment style greeting */}
+            <motion.div
+              variants={itemVariants}
+              className="font-mono text-sm mb-4 flex items-center justify-center md:justify-start gap-2"
+              style={{ color: '#B8860B' }}
+            >
+              <FiCode className="text-lg" />
+              <span>// introducing</span>
+            </motion.div>
+
+            {/* Name with technical styling */}
+            <motion.h1
+              variants={itemVariants}
+              className="heading-large mb-2"
+            >
+              <span className="bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 bg-clip-text text-transparent" >{personalInfo.name.split(' ')[0]}</span>
+              <br />
+              <span className="relative inline-block bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 bg-clip-text text-transparent">
+                {personalInfo.name.split(' ')[1]}
+                {/* Underline with glow */}
+                <span className="absolute -bottom-2 left-0 w-full h-1 glow-primary" style={{ backgroundColor: '#B8860B', opacity: 0.5 }} />
               </span>
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">
-              Full Stack Developer & AI Enthusiast
-            </p>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto md:mx-0 mb-6 leading-relaxed">
-              I build full-stack applications with React, Node.js, and MongoDB. 
-              Passionate about creating elegant solutions and exploring AI technologies.
-            </p>
+            </motion.h1>
+
+            {/* Title with typing effect */}
+            <motion.div
+              variants={itemVariants}
+              className="font-mono text-lg text-[var(--text-secondary)] mb-6 flex items-center justify-center md:justify-start gap-2"
+            >
+              <span style={{ color: '#B8860B' }}>$</span>
+              <span>cat role.txt</span>
+              <span style={{ color: '#B8860B', animation: 'pulse 1s infinite' }}>|</span>
+            </motion.div>
             
+            <motion.p
+              variants={itemVariants}
+              className="font-mono text-xl md:text-2xl text-[var(--text-primary)] mb-4"
+            >
+              Full Stack Developer <span style={{ color: '#B8860B' }}>&</span> AI Enthusiast
+            </motion.p>
+
+            {/* Description with technical formatting */}
+            <motion.div
+              variants={itemVariants}
+              className="font-mono text-sm text-[var(--text-secondary)] max-w-xl mb-8 leading-relaxed bg-[var(--card-bg)] p-6 border-2 border-[var(--border)] rounded-lg relative"
+            >
+              <div className="absolute -top-3 left-4 px-2 bg-[var(--card-bg)] font-mono text-xs border-x-2 border-[var(--border)]" style={{ color: '#B8860B' }}>
+                about.me
+              </div>
+              <p className="leading-relaxed">
+                <span className="text-primary-500">const</span> <span className="text-[var(--text-primary)]">developer</span> = {'{'}
+                <br />
+                &nbsp;&nbsp;name: <span className="text-green-600 dark:text-green-400">'{personalInfo.name}'</span>,
+                <br />
+                &nbsp;&nbsp;nationality: <span className="text-green-600 dark:text-green-400">'India'</span>,
+                <br />
+                &nbsp;&nbsp;stack: [<span className="text-green-600 dark:text-green-400">'React'</span>, <span className="text-green-600 dark:text-green-400">'Node.js'</span>, <span className="text-green-600 dark:text-green-400">'Express.js'</span>, <span className="text-green-600 dark:text-green-400">'MongoDB'</span>],
+                <br />
+                &nbsp;&nbsp;passion: <span className="text-green-600 dark:text-green-400">'Building technical solutions with artistic flair'</span>
+                <br />
+                {'};'}
+              </p>
+            </motion.div>
+
+            {/* CTA Buttons - Outlined style */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap justify-center md:justify-start gap-4"
+            >
+              <a
+                href="#projects"
+                className="btn-outline group"
+              >
+                <span>View Projects</span>
+                <FiExternalLink className="inline ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
+              
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+              >
+                <span>Resume.pdf</span>
+                <span className="font-mono text-xs ml-2" style={{ color: '#B8860B' }}>(new tab)</span>
+              </a>
+            </motion.div>
+
             {/* Social Links */}
-            <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-6">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap justify-center md:justify-start gap-3 mt-8"
+            >
               <a
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white transition-all"
-                title="GitHub"
+                className="btn-icon group"
+                aria-label="GitHub"
               >
-                <FiGithub className="w-5 h-5" />
+                <FiGithub size={20} />
               </a>
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white transition-all"
-                title="LinkedIn"
+                className="btn-icon group"
+                aria-label="LinkedIn"
               >
-                <FiLinkedin className="w-5 h-5" />
+                <FiLinkedin size={20} />
               </a>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="p-2.5 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white transition-all"
-                title="Email"
+                className="btn-icon group"
+                aria-label="Email"
               >
-                <FiMail className="w-5 h-5" />
+                <FiMail size={20} />
               </a>
+            </motion.div>
+          </motion.div>
+
+          {/* Profile Image - Right Side with Creative Shape */}
+          <motion.div
+            variants={profileVariants}
+            className="relative order-1 md:order-2 group"
+          >
+            {/* Offset shadow/glow effect */}
+            <div className="absolute inset-0 border-2 translate-x-4 translate-y-4 -z-10 rounded-none" style={{ borderColor: '#B8860B' }} />
+            <div className="absolute inset-0 border-2 translate-x-2 translate-y-2 -z-5 rounded-none" style={{ borderColor: '#B8860B', opacity: 0.5 }} />
+            
+            {/* Technical frame elements */}
+            <div className="absolute -top-6 -right-6 w-12 h-12 border-t-2 border-r-2" style={{ borderColor: '#B8860B' }} />
+            <div className="absolute -bottom-6 -left-6 w-12 h-12 border-b-2 border-l-2" style={{ borderColor: '#B8860B' }} />
+            
+            {/* Corner brackets */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2" style={{ borderColor: '#B8860B' }} />
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2" style={{ borderColor: '#B8860B' }} />
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2" style={{ borderColor: '#B8860B' }} />
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2" style={{ borderColor: '#B8860B' }} />
+
+            {/* Profile image with shape */}
+            <div className="relative w-72 h-72 md:w-80 md:h-80 overflow-hidden border-2 border-[var(--border)]">
+              <img
+                src="/profile.png"
+                alt={personalInfo.name}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              
+              {/* Overlay grid on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500" style={{
+                backgroundImage: `
+                  linear-gradient(to right, #B8860B 1px, transparent 1px),
+                  linear-gradient(to bottom, #B8860B 1px, transparent 1px)
+                `,
+                backgroundSize: '20px 20px'
+              }} />
             </div>
 
-            {/* View Resume Button */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-2.5 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-medium text-sm"
+            {/* Floating technical badges */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -top-8 -right-8 bg-[var(--card-bg)] border-2 px-3 py-1 rounded-none font-mono text-sm" 
+              style={{ borderColor: '#B8860B' }}
             >
-              View Resume <FiExternalLink className="ml-2" />
-            </a>
+              &lt;dev /&gt;
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+              className="absolute -bottom-8 -left-8 bg-[var(--card-bg)] border-2 px-3 py-1 rounded-none font-mono text-sm"
+              style={{ borderColor: '#B8860B' }}
+            >
+              .exe
+            </motion.div>
           </motion.div>
         </div>
-      </div>
+
+        {/* Scroll indicator - Technical style */}
+        <motion.div
+          variants={itemVariants}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block"
+        >
+          <a
+            href="#skills"
+            className="flex flex-col items-center gap-2 text-[var(--text-secondary)] transition-colors font-mono text-xs hover:text-[#B8860B]"
+          >
+            <span>$ scroll_down --execute</span>
+            <FiArrowDown className="animate-bounce" />
+          </a>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

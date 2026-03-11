@@ -8,7 +8,7 @@ import Certificates from './components/sections/Certificates';
 import Education from './components/sections/Education';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
-import WatercolorFlow from './components/ui/WatercolorFlow';
+import FluidCursor from './components/ui/FluidCursor';
 
 function App() {
   useEffect(() => {
@@ -27,8 +27,11 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative">
-        <WatercolorFlow />
+      {/* Background canvas - behind everything */}
+      <FluidCursor />
+      
+      {/* Content - with transparent background */}
+      <div className="min-h-screen text-gray-900 dark:text-white relative">
         <Navbar />
         <main className="relative z-10">
           <Hero />
