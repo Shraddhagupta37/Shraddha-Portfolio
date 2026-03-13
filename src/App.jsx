@@ -5,7 +5,7 @@ import Hero from './components/sections/Hero';
 import Skills from './components/sections/Skills';
 import Projects from './components/sections/Projects';
 import Certificates from './components/sections/Certificates';
-import Education from './components/sections/Education';
+import Journey from './components/sections/Journey';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
 import FluidCursor from './components/ui/FluidCursor';
@@ -38,7 +38,7 @@ function App() {
           <Skills />
           <Projects />
           <Certificates />
-          <Education />
+          <Journey />
           <Contact />
         </main>
         <Footer />

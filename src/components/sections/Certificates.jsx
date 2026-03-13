@@ -1,84 +1,205 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiArrowRight } from 'react-icons/fi';
-import { certificates } from '../../data/content';
+import React, { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { FiExternalLink, FiAward, FiCalendar } from "react-icons/fi";
+import { certificates } from "../../data/content";
 
 const Certificates = () => {
-  const [showAll, setShowAll] = useState(false);
-  const displayedCerts = showAll ? certificates : certificates.slice(0, 4);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const timelineRef = useRef(null);
+  const containerRef = useRef(null);
+
+  // Track horizontal scroll progress
+  const handleHorizontalScroll = () => {
+    if (timelineRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = timelineRef.current;
+      const progress = scrollLeft / (scrollWidth - clientWidth);
+      setScrollProgress(progress || 0);
+    }
+  };
+
+  useEffect(() => {
+    const timeline = timelineRef.current;
+    if (timeline) {
+      timeline.addEventListener('scroll', handleHorizontalScroll);
+      return () => timeline.removeEventListener('scroll', handleHorizontalScroll);
+    }
+  }, []);
+
+  const formatDate = (cert) => {
+    const dateStr = cert.date_achieved || cert.date;
+    if (!dateStr) return "Issued";
+
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short"
+    });
+  };
 
   return (
-    <section id="certificates" className="py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-display font-bold mb-1">Certifications</h2>
-            <p className="text-gray-600 dark:text-gray-400">Continuous learning journey</p>
-          </motion.div>
+    <section id="certificates" className="relative py-24 overflow-hidden" ref={containerRef}>
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(to right, var(--accent-gold) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--accent-gold) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }} />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="font-mono text-xs tracking-wider text-[var(--accent-gold)]">
+              / certifications
+            </span>
+            <div className="h-px w-12 bg-gradient-to-r from-[var(--accent-gold)] to-transparent" />
+          </div>
           
-          {!showAll && certificates.length > 4 && (
-            <motion.button
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              onClick={() => setShowAll(true)}
-              className="flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium text-sm"
-            >
-              View All ({certificates.length}) <FiArrowRight />
-            </motion.button>
-          )}
-        </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-[#B8860B] via-[#B87333] to-[#C0C0C0] bg-clip-text text-transparent">
+              Technical Credentials
+            </span>
+          </h2>
+          <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
+            Industry-recognized certifications in software development, AI, and cloud computing
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          <AnimatePresence>
-            {displayedCerts.map((cert, index) => (
-              <motion.a
-                key={index}
-                href={cert.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -2 }}
-                className="group"
-              >
-                <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 hover:shadow-md transition-all">
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center text-white text-xs font-bold">
-                      📜
-                    </div>
-                    <FiExternalLink className="w-3.5 h-3.5 text-gray-400 group-hover:text-primary-500" />
-                  </div>
-                  <h3 className="font-medium text-sm mb-1 line-clamp-2">{cert.name}</h3>
-                  <p className="text-xs text-primary-500 mb-1">{cert.issuer}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-500">{cert.date}</p>
-                </div>
-              </motion.a>
-            ))}
-          </AnimatePresence>
-        </div>
+        {/* Timeline Layout */}
+        <div className="relative">
+          {/* Timeline Line Container - with faded ends */}
+          <div className="absolute top-8 left-0 w-full h-[2px] overflow-hidden">
+            {/* Background track */}
+            <div className="absolute inset-0" style={{
+              background: 'linear-gradient(90deg, transparent, var(--border)/30 10%, var(--border)/30 90%, transparent)'
+            }} />
+            
+            {/* Animated fill line */}
+            <motion.div 
+              className="absolute left-0 top-0 h-full"
+              style={{
+                width: `${scrollProgress * 100}%`,
+                background: 'linear-gradient(90deg, transparent, var(--accent-gold) 10%, var(--accent-copper) 90%, transparent)',
+              }}
+            />
+          </div>
 
-        {showAll && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center mt-6"
+          {/* Scrollable timeline */}
+          <div
+            ref={timelineRef}
+            className="flex gap-8 overflow-x-auto pb-8 pt-4 px-4 scrollbar-hide"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            <button
-              onClick={() => setShowAll(false)}
-              className="text-sm text-primary-500 hover:text-primary-600"
-            >
-              Show Less
-            </button>
-          </motion.div>
-        )}
+            {certificates.map((cert, i) => {
+              const isHovered = hoveredIndex === i;
+              // Fix: use index-based accent color but ensure first card doesn't default to gold border
+              const accentColor = i % 3 === 0 ? 'var(--accent-gold)' : 
+                                 i % 3 === 1 ? 'var(--accent-copper)' : 'var(--accent-silver)';
+
+              // Dot active state
+              const dotActive = scrollProgress > (i / certificates.length) - 0.1 && 
+                               scrollProgress < (i / certificates.length) + 0.1;
+
+              return (
+                <motion.div
+                  key={i}
+                  onHoverStart={() => setHoveredIndex(i)}
+                  onHoverEnd={() => setHoveredIndex(null)}
+                  className="relative min-w-[300px]"
+                >
+                  {/* Timeline Node */}
+                  <motion.div 
+                    className="w-4 h-4 rounded-full mx-auto mb-6 relative z-10"
+                    animate={{ 
+                      scale: isHovered || dotActive ? 1.3 : 1,
+                    }}
+                    style={{ 
+                      backgroundColor: accentColor,
+                      boxShadow: dotActive ? `0 0 15px ${accentColor}` : 'none',
+                    }}
+                    transition={{ duration: 0.2 }}
+                  />
+
+                  {/* Card */}
+                  <motion.div
+                    animate={{ y: isHovered ? -4 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="relative h-[300px]"
+                  >
+                    {/* Double borders */}
+                    <div className="absolute inset-0 border-2 translate-x-2 translate-y-2 rounded-xl -z-10"
+                         style={{ borderColor: accentColor }} />
+                    <div className="absolute inset-0 border-2 translate-x-1 translate-y-1 rounded-xl -z-5"
+                         style={{ borderColor: accentColor, opacity: 0.4 }} />
+                    
+                    {/* Main card */}
+                    <div className="relative bg-[var(--card-bg)] border-2 border-[var(--border)] rounded-xl 
+                                  p-6 h-full flex flex-col transition-all duration-200 hover:border-[var(--accent-gold)]">
+                      
+                      {/* Issuer section - fixed at top */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <FiAward className="w-4 h-4 shrink-0" style={{ color: accentColor }} />
+                        <span className="text-xs font-mono text-[var(--text-secondary)] truncate">
+                          {cert.issuer || cert.organization}
+                        </span>
+                      </div>
+
+                      {/* Certificate name */}
+                      <h3 className="text-xl font-display font-semibold mb-3 leading-snug line-clamp-2">
+                        {cert.name}
+                      </h3>
+
+                      {/* Date - with icon */}
+                      <div className="flex items-center gap-2 mb-4">
+                        <FiCalendar className="w-3 h-3 shrink-0" style={{ color: accentColor }} />
+                        <span className="text-xs font-mono text-[var(--text-secondary)]">
+                          {formatDate(cert)}
+                        </span>
+                      </div>
+
+                      {/* Description - flexible space */}
+                      {cert.description && (
+                        <p className="text-xs text-[var(--text-secondary)] mb-4 leading-relaxed line-clamp-2">
+                          {cert.description}
+                        </p>
+                      )}
+
+                      {/* Spacer to push verify link to bottom */}
+                      <div className="flex-1" />
+
+                      {/* Verify link - with hover effect */}
+                      <motion.a
+                        href={cert.link || cert.verification_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ x: 4 }}
+                        className="inline-flex items-center gap-2 text-xs font-mono
+                                 text-[var(--text-secondary)] hover:text-[var(--accent-gold)] 
+                                 transition-colors group/link pt-2 border-t border-[var(--border)]/30"
+                      >
+                        <span>Verify credential</span>
+                        <FiExternalLink className="w-3 h-3 group-hover/link:translate-x-1 
+                                                 group-hover/link:-translate-y-1 transition-transform" />
+                      </motion.a>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

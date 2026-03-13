@@ -127,21 +127,21 @@ export const achievements = [
 
 export const certificates = [
   {
-    name: "Build Generative AI Apps",
+    name: "Build Generative AI Apps and Solutions with No-Code Tools",
     issuer: "Infosys",
     date: "Sep 2025",
     link: "ude.my/UC-016ab957-007f-455b-8add-95ba826f2b52",
     image: "/cert1.jpg"
   },
   {
-    name: "Computational Theory",
+    name: "Computational Theory: Language Principle & Finite Automata Theory",
     issuer: "Infosys",
     date: "Aug 2025",
     link: "https://drive.google.com/file/d/10ccvblG71XUn1LqDxnyhPFMz0o28OoKR/view",
     image: "/cert2.jpg"
   },
   {
-    name: "Master Generative AI",
+    name: "Master Generative AI and Generative AI Tools (ChatGPT and more)",
     issuer: "Udemy",
     date: "Jul 2025",
     link: "https://www.udemy.com/certificate/UC-886f605e-d025-453a-aa99-73dfc2430f46/",
@@ -155,14 +155,14 @@ export const certificates = [
     image: "/cert4.jpg"
   },
   {
-    name: "Computer Networking",
+    name: "The Bits and Bytes of Computer Networking",
     issuer: "Coursera",
     date: "Sep 2024",
     link: "https://www.coursera.org/account/accomplishments/verify/WOSC82OZAA4I",
     image: "/cert5.jpg"
   },
   {
-    name: "Responsive Web Design",
+    name: "Legacy Responsive Web Design V8",
     issuer: "FreeCodeCamp",
     date: "Oct 2023",
     link: "https://www.freecodecamp.org/certification/fccbb4c3504-1de3-4546-9353-231ace85f3a7/responsive-web-design",
