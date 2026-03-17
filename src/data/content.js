@@ -16,7 +16,7 @@ export const skills = {
     { name: "Java", icon: "SiJava" },
     { name: "JavaScript", icon: "SiJavascript" },
     { name: "PHP", icon: "SiPhp" },
-    { name: "TypeScript", icon: "SiTypescript" } // Added for completeness
+    // { name: "TypeScript", icon: "SiTypescript" } // Added for completeness
   ],
   frameworks: [
     { name: "React", icon: "SiReact" },
@@ -28,7 +28,7 @@ export const skills = {
     { name: "Swing", icon: "SiJava" }, // Fallback to Java icon
     { name: "AWT", icon: "SiJava" }     // Fallback to Java icon
   ],
-  databases: [ // New separate category
+  databases: [ 
     { name: "MySQL", icon: "SiMysql" },
     { name: "MongoDB", icon: "SiMongodb" },
     { name: "PostgreSQL", icon: "SiPostgresql" }
