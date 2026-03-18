@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { FiCode, FiServer, FiDatabase, FiTool } from "react-icons/fi";
 import { skills } from "../../data/content";
 
-// Devicon CDN URLs - much more comprehensive than simple-icons
+// Devicon CDN URLs with proper Excel fix
 const getLogoUrl = (skillName) => {
   const logoMap = {
     // Languages
@@ -18,9 +18,11 @@ const getLogoUrl = (skillName) => {
     React: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
     "Node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
     "Express.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+    Vite: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg",
     HTML5: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
     CSS3: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
     TailwindCSS: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+    Laravel: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
     Swing: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
     AWT: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
     
@@ -34,12 +36,51 @@ const getLogoUrl = (skillName) => {
     GitHub: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
     Docker: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
     "VS Code": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-    Excel: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", // fallback
+    Vagrant: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vagrant/vagrant-original.svg",
+    Excel: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg",
     Windows: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg",
     Linux: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
   };
   
   return logoMap[skillName] || null;
+};
+
+// Skill descriptions for hover meaning
+const skillDescriptions = {
+  // Languages
+  Python: "Data processing & automation",
+  C: "System programming",
+  "C++": "Performance-critical apps",
+  Java: "Enterprise applications",
+  JavaScript: "Interactive web apps",
+  PHP: "Server-side scripting",
+  
+  // Frameworks
+  React: "Building interactive UIs",
+  "Node.js": "Scalable backend services",
+  "Express.js": "RESTful APIs",
+  Vite: "Lightning-fast builds",
+  HTML5: "Semantic structure",
+  CSS3: "Modern styling",
+  TailwindCSS: "Utility-first styling",
+  Laravel: "PHP MVC framework",
+  Swing: "Java desktop apps",
+  AWT: "Legacy GUI development",
+  
+  // Databases
+  MySQL: "Relational databases",
+  MongoDB: "NoSQL document store",
+  PostgreSQL: "Advanced relational DB",
+  
+  // Tools
+  Git: "Version control",
+  GitHub: "Code collaboration",
+  Docker: "Containerization",
+  "VS Code": "Primary IDE",
+  Vagrant: "Development environments",
+  Excel: "Data analysis",
+  Windows: "Desktop OS",
+  Linux: "Server environment"
 };
 
 // Organize skills data for display
@@ -73,7 +114,16 @@ const skillsCategories = [
 const Skills = () => {
   const [activeIndices, setActiveIndices] = useState({});
   const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [terminalStep, setTerminalStep] = useState(0);
   const sectionRef = useRef(null);
+
+  // Terminal typing effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTerminalStep(prev => (prev < 2 ? prev + 1 : prev));
+    }, 800);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -113,7 +163,7 @@ const Skills = () => {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Heading */}
+        {/* Heading with Terminal Continuity */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="font-mono text-xs tracking-wider text-[var(--accent-gold)]">
@@ -122,15 +172,20 @@ const Skills = () => {
             <div className="h-px w-12 bg-gradient-to-r from-[var(--accent-gold)] to-transparent" />
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             <span className="bg-gradient-to-r from-[#B8860B] via-[#B87333] to-[#C0C0C0] bg-clip-text text-transparent">
               Technical Skills
             </span>
           </h2>
           
-          <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
-            Technologies I work with daily
-          </p>
+          {/* Terminal narrative */}
+          <div className="font-mono text-sm text-[var(--text-secondary)] bg-[var(--card-bg)]/50 inline-block px-4 py-2 rounded-full border border-[var(--border)]">
+            <span className="text-[var(--accent-gold)]">$</span>
+            {terminalStep === 0 && " load_skills.sh"}
+            {terminalStep === 1 && " Loading core technologies..."}
+            {terminalStep === 2 && " 26 modules loaded"}
+            <span className="animate-pulse ml-1">_</span>
+          </div>
         </div>
 
         {/* Skills Categories */}
@@ -160,9 +215,10 @@ const Skills = () => {
 
                 {/* Skills Items - Right side */}
                 <div className="md:col-span-8 lg:col-span-9">
-                  <div className="flex flex-wrap gap-6 md:gap-8">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {category.items.map((skill, skillIndex) => {
                       const logoUrl = getLogoUrl(skill.name);
+                      const description = skillDescriptions[skill.name] || "Professional experience";
                       const itemId = `${categoryId}-item-${skillIndex}`;
                       const isHovered = hoveredSkill === itemId;
                       
@@ -172,7 +228,7 @@ const Skills = () => {
                           data-index={itemId}
                           onMouseEnter={() => setHoveredSkill(itemId)}
                           onMouseLeave={() => setHoveredSkill(null)}
-                          className={`group relative cursor-pointer transition-all duration-700 ${
+                          className={`group relative transition-all duration-700 ${
                             activeIndices[itemId] 
                               ? 'opacity-100 translate-y-0' 
                               : 'opacity-0 translate-y-10'
@@ -181,54 +237,53 @@ const Skills = () => {
                             transitionDelay: `${skillIndex * 100}ms`
                           }}
                         >
-                          {/* Glow effect on hover */}
-                          <div className={`absolute -inset-2 rounded-full opacity-0 transition-all duration-500 ${
-                            isHovered ? 'opacity-30' : ''
-                          }`}
-                               style={{ 
-                                 boxShadow: `0 0 40px ${category.color}`,
-                                 backgroundColor: category.color
-                               }} />
-                          
-                          {/* Main content */}
-                          <div className={`relative flex items-center gap-3 p-2
-                                        transition-all duration-300 ease-out
-                                        ${isHovered ? 'scale-110' : 'scale-100'}`}>
+                          {/* Card with micro-interactions */}
+                          <div className={`relative bg-[var(--card-bg)] border-2 border-[var(--border)] rounded-lg p-3
+                                        transition-all duration-300
+                                        hover:scale-105 hover:shadow-[0_0_10px_rgba(184,134,11,0.3)]
+                                        hover:border-[var(--accent-gold)]
+                                        ${isHovered ? 'shadow-md border-[var(--accent-gold)]' : ''}`}>
                             
-                            {/* Logo image */}
-                            <div className="relative">
-                              <div className={`absolute inset-0 rounded-full blur-md transition-opacity duration-500 ${
-                                isHovered ? 'opacity-60' : 'opacity-0'
-                              }`}
-                                   style={{ backgroundColor: category.color }} />
+                            {/* Icon and name side by side */}
+                            <div className="flex items-center gap-3">
                               {logoUrl ? (
                                 <img 
                                   src={logoUrl}
                                   alt={skill.name}
-                                  className="w-8 h-8 md:w-10 md:h-10"
+                                  className="w-6 h-6 md:w-7 md:h-7 transition-all duration-300
+                                           group-hover:rotate-6 group-hover:scale-110"
                                   onError={(e) => {
                                     e.target.onerror = null;
                                     e.target.src = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/devicon/devicon-original.svg";
                                   }}
                                 />
                               ) : (
-                                <div className="w-8 h-8 md:w-10 md:h-10 bg-[var(--border)] rounded-full flex items-center justify-center">
+                                <div className="w-6 h-6 md:w-7 md:h-7 bg-[var(--border)] rounded-full flex items-center justify-center
+                                              transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
                                   <span className="text-xs font-mono">{skill.name[0]}</span>
                                 </div>
                               )}
+                              
+                              <span className={`text-sm md:text-base font-mono transition-colors duration-300
+                                             ${isHovered ? 'text-[var(--accent-gold)]' : ''}`}>
+                                {skill.name}
+                              </span>
                             </div>
-                            
-                            {/* Skill name */}
-                            <span className={`text-lg md:text-xl font-medium font-mono
-                                           transition-all duration-300
-                                           ${isHovered ? 'text-[var(--accent-gold)] scale-105' : ''}`}>
-                              {skill.name}
-                            </span>
 
-                            {/* Corner accent */}
-                            {/* <div className={`w-1.5 h-1.5 border-t border-r border-[var(--accent-gold)] 
-                                          transition-all duration-300
-                                          ${isHovered ? 'opacity-100 scale-125' : 'opacity-0'}`} /> */}
+                            {/* Hover meaning - description on top right */}
+                            {isHovered && (
+                              <div className="absolute -top-3 -right-2 z-20">
+                                <div className="relative">
+                                  <div className="absolute inset-0 blur-md bg-[var(--accent-gold)] opacity-20 rounded-full" />
+                                  <div className="relative bg-[var(--card-bg)] border-2 border-[var(--accent-gold)] 
+                                                px-3 py-1 rounded-full shadow-lg">
+                                    <span className="text-xs font-mono text-[var(--accent-gold)] whitespace-nowrap">
+                                      {description}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       );
@@ -238,6 +293,12 @@ const Skills = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Terminal footer */}
+        <div className="mt-20 text-center font-mono text-sm text-[var(--text-secondary)]">
+          <span className="text-[var(--accent-gold)]">$</span> echo "Ready to build something amazing"
+          <span className="animate-pulse ml-1">_</span>
         </div>
       </div>
     </section>

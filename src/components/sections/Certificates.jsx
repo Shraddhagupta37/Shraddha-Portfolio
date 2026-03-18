@@ -67,7 +67,7 @@ const Certificates = () => {
             <div className="h-px w-12 bg-gradient-to-r from-[var(--accent-gold)] to-transparent" />
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
             <span className="bg-gradient-to-r from-[#B8860B] via-[#B87333] to-[#C0C0C0] bg-clip-text text-transparent">
               Technical Credentials
             </span>

@@ -100,7 +100,7 @@ const Projects = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-3">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-3">
             <span className="bg-gradient-to-r from-[#B8860B] via-[#B87333] to-[#C0C0C0] bg-clip-text text-transparent">
               Projects
             </span>

@@ -9,6 +9,7 @@ import Journey from './components/sections/Journey';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
 import FluidCursor from './components/ui/FluidCursor';
+import About from './components/sections/About';
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
         <Navbar />
         <main className="relative z-10">
           <Hero />
+          <About />
           <Skills />
           <Projects />
           <Certificates />

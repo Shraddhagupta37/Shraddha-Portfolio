@@ -71,7 +71,7 @@ const Journey = () => {
             }} />
           </div>
           
-          <h2 className="text-4xl md:text-5xl font font-bold mb-3">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-3">
             <span className="bg-gradient-to-r from-[#B8860B] via-[#B87333] to-[#C0C0C0] bg-clip-text text-transparent">
               Path to Engineering
             </span>
@@ -105,7 +105,7 @@ const Journey = () => {
                 <div className="absolute left-[22px] md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 rounded-full border-2 bg-[var(--card-bg)] z-10"
                      style={{ borderColor: item.color }} />
 
-                {/* Date marker - appears on the side */}
+                {/* Date marker */}
                 <div className={`hidden md:block w-1/2 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}`}>
                   <span className="font-mono text-sm" style={{ color: 'var(--accent-silver)' }}>
                     {item.period}
@@ -114,7 +114,7 @@ const Journey = () => {
 
                 {/* Content Card */}
                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pl-8' : 'md:pr-8'}`}>
-                  {/* Double border card - exactly like hero section */}
+                  {/* Double border card */}
                   <div className="relative group">
                     {/* Double offset borders */}
                     <div className="absolute inset-0 border-2 translate-x-2 translate-y-2 -z-10"
@@ -176,7 +176,7 @@ const Journey = () => {
                         </div>
                       )}
 
-                      {/* Footer */}
+                      {/* Footer - with verify link as a standalone anchor */}
                       <div className="flex items-center justify-between pt-4 border-t border-[var(--border)]">
                         <div className="hidden md:flex items-center gap-2">
                           <FiMapPin className="w-3 h-3" style={{ color: 'var(--accent-silver)' }} />
@@ -190,21 +190,21 @@ const Journey = () => {
                             href={item.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group/link flex items-center gap-2 px-3 py-1.5 border border-[var(--border)]
-                                     hover:border-[var(--accent-gold)] transition-all duration-300"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 border border-[var(--border)]
+                                     hover:border-[var(--accent-gold)] hover:text-[var(--accent-gold)]
+                                     transition-all duration-300 cursor-pointer z-20 relative"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              console.log('Opening link:', item.link);
+                            }}
                           >
-                            <span className="text-xs font-mono text-[var(--text-secondary)] 
-                                         group-hover/link:text-[var(--accent-gold)]">
-                              verify
-                            </span>
-                            <FiExternalLink className="w-3 h-3 text-[var(--text-secondary)] 
-                                                   group-hover/link:text-[var(--accent-gold)] 
-                                                   group-hover/link:translate-x-0.5 transition-all" />
+                            <span className="text-xs font-mono">verify</span>
+                            <FiExternalLink className="w-3 h-3" />
                           </a>
                         )}
                       </div>
 
-                      {/* Corner accents - appear on hover */}
+                      {/* Corner accents */}
                       <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--accent-gold)] opacity-0 group-hover:opacity-100 transition-opacity" />
                       <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--accent-copper)] opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>

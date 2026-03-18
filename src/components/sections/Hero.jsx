@@ -76,9 +76,9 @@ const Hero = () => {
               variants={itemVariants}
               className="heading-large mb-2"
             >
-              <span className="bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 bg-clip-text text-transparent" >{personalInfo.name.split(' ')[0]}</span>
+              <span className="font-display bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 bg-clip-text text-transparent" >{personalInfo.name.split(' ')[0]}</span>
               <br />
-              <span className="relative inline-block bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="font-display relative inline-block bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 bg-clip-text text-transparent">
                 {personalInfo.name.split(' ')[1]}
                 {/* Underline with glow */}
                 <span className="absolute -bottom-2 left-0 w-full h-1 glow-primary" style={{ backgroundColor: '#B8860B', opacity: 0.5 }} />

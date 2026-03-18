@@ -22,11 +22,13 @@ export const skills = {
     { name: "React", icon: "SiReact" },
     { name: "Node.js", icon: "SiNodedotjs" },
     { name: "Express.js", icon: "SiExpress" },
+    { name: "Vite", icon: "SiVite" },
     { name: "HTML5", icon: "SiHtml5" },
     { name: "CSS3", icon: "SiCss3" },
     { name: "TailwindCSS", icon: "SiTailwindcss" },
-    { name: "Swing", icon: "SiJava" }, // Fallback to Java icon
-    { name: "AWT", icon: "SiJava" }     // Fallback to Java icon
+    { name: "Swing", icon: "SiJava" }, 
+    { name: "AWT", icon: "SiJava" },
+    { name: "Laravel", icon: "SiLaravel" }     
   ],
   databases: [ 
     { name: "MySQL", icon: "SiMysql" },
@@ -39,7 +41,8 @@ export const skills = {
     { name: "VS Code", icon: "SiVisualstudiocode" },
     { name: "Excel", icon: "SiMicrosoftexcel" },
     { name: "Windows", icon: "SiWindows" },
-    { name: "Linux", icon: "SiLinux" }
+    { name: "Linux", icon: "SiLinux" },
+    { name: "Vagrant", icon: "SiVagrant" },
   ]
 };
 

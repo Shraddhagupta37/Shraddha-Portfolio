@@ -54,7 +54,7 @@ const Contact = () => {
                   background: `linear-gradient(90deg, var(--accent-gold), transparent)`
                 }} />
               </div>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+              <h2 className="text-5xl md:text-6xl font-display font-bold mb-6">
                 <span className="bg-gradient-to-r from-[#B8860B] via-[#B87333] to-[#C0C0C0] bg-clip-text text-transparent">
                   Let's Connect
                 </span>
