@@ -55,7 +55,7 @@ export const projects = [
     tech: ["React", "Node.js", "Express", "MongoDB"],
     github: "https://github.com/Shraddhagupta37/Quality-Pulse-Construction-QA",
     date: "Dec 2025",
-    image: "../../public/project1.png",
+    image: "/project1.png",
     featured: true
   },
   {
@@ -66,7 +66,7 @@ export const projects = [
     tech: ["Java", "Swing", "AWT"],
     github: "https://github.com/Shraddhagupta37/ToddleUp-Kids-Learning-App",
     date: "Aug 2025",
-    image: "../../public/project2.png",
+    image: "/project2.png",
     featured: true
   },
   {
@@ -77,7 +77,7 @@ export const projects = [
     tech: ["PHP", "MySQL", "TailwindCSS", "JavaScript"],
     github: "https://github.com/Shraddhagupta37/CodeLens-Proctor-Exam-Platform",
     date: "May 2025",
-    image: "../../public/project3.png",
+    image: "/project3.png",
     featured: true
   },
   {
@@ -88,7 +88,7 @@ export const projects = [
     tech: ["React", "Material UI", "Node.js", "Express", "MongoDB", "JWT"],
     github: "https://github.com/Shraddhagupta37/MDM-System",
     date: "Mar 2026",
-    image: "../../public/project4.png",
+    image: "/project4.png",
     features: [
       "Secure authentication using JWT",
       "Device enrollment and management",
@@ -108,7 +108,7 @@ export const projects = [
     tech: ["React", "TailwindCSS", "Framer Motion", "JavaScript"],
     github: "https://github.com/Shraddhagupta37/Shraddha-Portfolio",
     date: "Mar 2026",
-    image: "../../public/project5.png"
+    image: "/project5.png"
   }
 ];
 
