@@ -12,7 +12,7 @@
   <h3>A sophisticated, interactive developer portfolio with fluid animations and metallic aesthetics</h3>
   <p>Built with React, TailwindCSS, and Framer Motion</p>
   
-  [![Live Demo](https://img.shields.io/badge/LIVE_DEMO-↗-B8860B?style=for-the-badge&logo=vercel)](shraddha-portfolio-theta.vercel.app)
+  [![Live Demo](https://img.shields.io/badge/LIVE_DEMO-↗-B8860B?style=for-the-badge&logo=vercel)](https://shraddha-portfolio-theta.vercel.app/)
   [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Shraddhagupta37)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shraddha-gupta-8ab9b828a/)
 </div>
