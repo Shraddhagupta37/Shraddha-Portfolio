@@ -84,7 +84,7 @@ export const projects = [
     id: 4,
     title: "MDM System",
     description: "Mobile Device Management System",
-    fullDescription: "A full-stack Mobile Device Management (MDM) system that enables centralized management, monitoring, and updating of Android devices. Provides real-time visibility into device health, version distribution, and update execution through a modern, analytics-driven dashboard.",
+    fullDescription: "A full-stack Mobile Device Management (MDM) system that enables centralized management, monitoring, and updating of mobile devices. Provides real-time visibility into device health, version distribution, and update execution through a modern, analytics-driven dashboard.",
     tech: ["React", "Material UI", "Node.js", "Express", "MongoDB", "JWT"],
     github: "https://github.com/Shraddhagupta37/MDM-System",
     date: "Mar 2026",
