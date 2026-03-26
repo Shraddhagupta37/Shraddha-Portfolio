@@ -125,7 +125,7 @@ const About = () => {
                   
                   <div className="relative z-10">
                     <p className="text-xl font-display font-medium italic leading-relaxed mb-6 text-[var(--text-primary)]">
-                      Building with intention, one line of code at a time.
+                      Building with intention, refining with every iteration.
                     </p>
                     
                     <div className="flex items-center gap-3 text-sm font-mono">
@@ -233,7 +233,7 @@ const About = () => {
                             group-hover:w-24 transition-all duration-500" />
               <span className="font-mono text-sm text-[var(--accent-gold)] tracking-wider
                              group-hover:tracking-[0.2em] transition-all duration-500">
-                build with intention
+                iterate. refine. improve.
               </span>
             </motion.div>
 
