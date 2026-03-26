@@ -115,14 +115,65 @@ const Skills = () => {
   const [activeIndices, setActiveIndices] = useState({});
   const [hoveredSkill, setHoveredSkill] = useState(null);
   const [terminalStep, setTerminalStep] = useState(0);
+  const intervalRef = useRef(null);
   const sectionRef = useRef(null);
 
-  // Terminal typing effect
+  const totalSkillsCount = Object.values(skills).reduce((sum, cat) => sum + cat.length, 0);
+
+  // Start the terminal animation
+  const startTerminalAnimation = () => {
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    
+    setTerminalStep(0);
+    
+    let step = 0;
+    intervalRef.current = setInterval(() => {
+      if (step < 2) {
+        step++;
+        setTerminalStep(step);
+      } else {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+      }
+    }, 600);
+  };
+
+  // Reset terminal animation when section becomes visible
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTerminalStep(prev => (prev < 2 ? prev + 1 : prev));
-    }, 800);
-    return () => clearInterval(interval);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Section became visible - start animation
+            startTerminalAnimation();
+          } else {
+            // Section left view - reset and clear interval
+            if (intervalRef.current) {
+              clearInterval(intervalRef.current);
+              intervalRef.current = null;
+            }
+            setTerminalStep(0);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -178,13 +229,15 @@ const Skills = () => {
             </span>
           </h2>
           
-          {/* Terminal narrative */}
-          <div className="font-mono text-sm text-[var(--text-secondary)] bg-[var(--card-bg)]/50 inline-block px-4 py-2 rounded-full border border-[var(--border)]">
+          {/* Terminal narrative - animated on scroll */}
+          <div className="font-mono text-sm text-[var(--text-secondary)] bg-[var(--card-bg)]/50 inline-block px-4 py-2 rounded-full border border-[var(--border)] transition-all duration-300 min-w-[220px]">
             <span className="text-[var(--accent-gold)]">$</span>
             {terminalStep === 0 && " load_skills.sh"}
             {terminalStep === 1 && " Loading core technologies..."}
-            {terminalStep === 2 && " 26 modules loaded"}
-            <span className="animate-pulse ml-1">_</span>
+            {terminalStep === 2 && ` ${totalSkillsCount} modules loaded`}
+            <span className="animate-pulse ml-1">
+              {terminalStep < 2 ? "|" : "_"}
+            </span>
           </div>
         </div>
 

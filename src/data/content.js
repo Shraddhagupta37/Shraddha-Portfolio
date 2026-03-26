@@ -43,6 +43,7 @@ export const skills = {
     { name: "Windows", icon: "SiWindows" },
     { name: "Linux", icon: "SiLinux" },
     { name: "Vagrant", icon: "SiVagrant" },
+    { name: "Docker", icon: "SiDocker" },
   ]
 };
 

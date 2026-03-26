@@ -1,23 +1,10 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiCalendar, FiMapPin, FiAward, FiCode, FiBookOpen, FiExternalLink } from 'react-icons/fi';
+import { FiCalendar, FiMapPin, FiAward, FiCode, FiBookOpen, FiExternalLink, FiStar, FiBriefcase } from 'react-icons/fi';
 
 const journeyData = [
   {
     id: 1,
-    type: "education",
-    title: "B.Tech in Computer Science",
-    organization: "Lovely Professional University",
-    location: "Punjab, India",
-    period: "2023 — Present",
-    description: "Currently maintaining a CGPA of 9.08. Coursework includes Data Structures, Algorithms, Operating Systems, and Full-Stack Development.",
-    achievements: ["University Honor Roll", "Winner: DevFest Gen-AI Hackathon"],
-    icon: FiBookOpen,
-    color: "var(--accent-gold)",
-    link: null
-  },
-  {
-    id: 2,
     type: "training",
     title: "Java Maestro: GUI Applications",
     organization: "Lovely Professional University",
@@ -28,6 +15,32 @@ const journeyData = [
     icon: FiCode,
     color: "var(--accent-copper)",
     link: "https://drive.google.com/file/d/1SrwS0FTCN776-9HD5pZC6ZBW8Yg3GblO/view"
+  },
+  {
+    id: 2,
+    type: "education",
+    title: "B.Tech in Computer Science",
+    organization: "Lovely Professional University",
+    location: "Punjab, India",
+    period: "2023 — Present",
+    description: "Currently maintaining a CGPA of 9.04. Coursework includes Data Structures, Algorithms, Operating Systems, and Full-Stack Development.",
+    achievements: ["University Honor Roll", "Winner: DevFest Gen-AI Hackathon"],
+    icon: FiBookOpen,
+    color: "var(--accent-gold)",
+    link: null
+  },
+  {
+    id: 3,
+    type: "school",
+    title: "School Education",
+    organization: "Udaya Public School",
+    location: "Ayodhya, Uttar Pradesh",
+    period: "2019 — 2022",
+    description: "Completed secondary and higher secondary education with a strong academic record in the science stream.",
+    achievements: ["Class X: 97.2%", "Class XII: 88%"],
+    icon: FiStar,
+    color: "var(--accent-copper)",
+    link: null
   }
 ];
 
@@ -38,7 +51,7 @@ const Journey = () => {
     offset: ["start end", "end start"]
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const lineHeight = useTransform(scrollYProgress, [0, 0.95], ['0%', '100%']);
 
   return (
     <section id="journey" className="section relative overflow-hidden py-24" ref={containerRef}>
@@ -53,7 +66,7 @@ const Journey = () => {
         }} />
       </div>
 
-      <div className="section-container max-w-5xl mx-auto">
+      <div className="section-container max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,15 +119,15 @@ const Journey = () => {
                      style={{ borderColor: item.color }} />
 
                 {/* Date marker */}
-                <div className={`hidden md:block w-1/2 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}`}>
+                <div className={`hidden md:block w-1/2 ${index % 2 === 0 ? 'text-right pr-12' : 'pl-12'}`}>
                   <span className="font-mono text-sm" style={{ color: 'var(--accent-silver)' }}>
                     {item.period}
                   </span>
                 </div>
 
                 {/* Content Card */}
-                <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pl-8' : 'md:pr-8'}`}>
-                  {/* Double border card */}
+                <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
+                  {/* Double border card - NO ROUNDED CORNERS */}
                   <div className="relative group">
                     {/* Double offset borders */}
                     <div className="absolute inset-0 border-2 translate-x-2 translate-y-2 -z-10"
@@ -122,7 +135,7 @@ const Journey = () => {
                     <div className="absolute inset-0 border-2 translate-x-1 translate-y-1 -z-5"
                          style={{ borderColor: item.color === 'var(--accent-gold)' ? 'var(--accent-copper)' : 'var(--accent-gold)', opacity: 0.4 }} />
                     
-                    {/* Main card */}
+                    {/* Main card - NO ROUNDED CORNERS */}
                     <div className="bg-[var(--card-bg)] border-2 border-[var(--border)] p-6
                                   transition-all duration-300 group-hover:border-[var(--accent-gold)]">
                       
@@ -133,9 +146,18 @@ const Journey = () => {
                           <item.icon className="w-5 h-5" style={{ color: item.color }} />
                         </div>
                         <div>
-                          <h3 className="text-xl font-display font-bold mb-1 group-hover:text-[var(--accent-gold)] transition-colors">
-                            {item.title}
-                          </h3>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-xl font-display font-bold mb-1 group-hover:text-[var(--accent-gold)] transition-colors">
+                              {item.title}
+                            </h3>
+                            <span className="text-xs font-mono px-2 py-0.5 rounded-full border"
+                                  style={{ 
+                                    borderColor: item.color,
+                                    color: item.color
+                                  }}>
+                              {item.type === 'education' ? '🎓' : item.type === 'training' ? '💻' : '🏫'}
+                            </span>
+                          </div>
                           <p className="text-sm font-mono" style={{ color: 'var(--accent-copper)' }}>
                             {item.organization}
                           </p>
@@ -163,7 +185,7 @@ const Journey = () => {
                       {item.achievements && (
                         <div className="mb-4">
                           <p className="text-xs font-mono mb-2" style={{ color: 'var(--accent-gold)' }}>
-                            // achievements
+                            // {item.type === 'school' ? 'academic' : 'key'} achievements
                           </p>
                           <ul className="space-y-1">
                             {item.achievements.map((achievement, i) => (
@@ -176,9 +198,9 @@ const Journey = () => {
                         </div>
                       )}
 
-                      {/* Footer - with verify link as a standalone anchor */}
+                      {/* Footer */}
                       <div className="flex items-center justify-between pt-4 border-t border-[var(--border)]">
-                        <div className="hidden md:flex items-center gap-2">
+                        <div className="flex items-center gap-2">
                           <FiMapPin className="w-3 h-3" style={{ color: 'var(--accent-silver)' }} />
                           <span className="text-xs font-mono text-[var(--text-secondary)]">
                             {item.location}
@@ -193,10 +215,6 @@ const Journey = () => {
                             className="inline-flex items-center gap-2 px-3 py-1.5 border border-[var(--border)]
                                      hover:border-[var(--accent-gold)] hover:text-[var(--accent-gold)]
                                      transition-all duration-300 cursor-pointer z-20 relative"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              console.log('Opening link:', item.link);
-                            }}
                           >
                             <span className="text-xs font-mono">verify</span>
                             <FiExternalLink className="w-3 h-3" />

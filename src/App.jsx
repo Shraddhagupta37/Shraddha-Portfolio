@@ -10,6 +10,7 @@ import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
 import FluidCursor from './components/ui/FluidCursor';
 import About from './components/sections/About';
+import BackToTop from './components/layout/BackToTop';
 
 function App() {
   useEffect(() => {
@@ -44,6 +45,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <BackToTop />
       </div>
     </ThemeProvider>
   );
