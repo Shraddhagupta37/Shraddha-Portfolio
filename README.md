@@ -187,8 +187,6 @@ The site auto-deploys on every push to the main branch.
 
 ---
 
----
-
 ## 🙏 Acknowledgments
 
 - Design inspiration from modern developer portfolios
@@ -207,4 +205,3 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Shraddha Gupta - [gshraddha246850@gmail.com](mailto:gshraddha246850@gmail.com)
 
----
