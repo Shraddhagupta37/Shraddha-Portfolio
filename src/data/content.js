@@ -103,6 +103,17 @@ export const projects = [
   },
   {
     id: 5,
+    title: "MindAssess",
+    description: "AI-powered mental wellness & self-assessment platform",
+    fullDescription: "A deeply personalized mental health self-assessment and tracking platform built with React + Vite. Features clinically-inspired assessments (PHQ-9, GAD-7, PSS) with automated scoring, an AI chatbot 'MindAssess Buddy' for empathetic guidance, emoji-based daily mood/sleep logging with 30-day analytics charts, a unique Calendar Heart visualization, and a full Wellness Toolkit with guided Breathing, Meditation, Pomodoro Focus, ambient Music mixer, and Sleep prep modules.",
+    tech: ["React", "Vite", "TailwindCSS", "JavaScript", "Gemini AI"],
+    github: "https://github.com/Shraddhagupta37/Mental-Assess-Project",
+    date: "May 2026",
+    image: "/project6.png",
+    featured: true
+  },
+  {
+    id: 6,
     title: "Portfolio 2026",
     description: "Interactive developer portfolio",
     fullDescription: "A modern, interactive portfolio website featuring fluid cursor effects, metallic gold/copper accents, terminal-style project displays, and smooth animations. Built with React, TailwindCSS, and Framer Motion.",
